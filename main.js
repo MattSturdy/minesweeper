@@ -1,10 +1,3 @@
-const getRandomCoordinate = (rows, columns) => {
-  return [
-    Math.floor(Math.random() * rows),
-    Math.floor(Math.random() * columns)
-  ];
-};
-
 const getMineField = (rows, columns, mines) => {
   let minefield = [];
   for (let i = 0; i < rows; i++) {
@@ -15,6 +8,7 @@ const getMineField = (rows, columns, mines) => {
   }
   for (let i = 0; i < mines; i++) {
     minefield = generateMinePositions(minefield, rows, columns);
+    console.log(minefield);
   }
   return minefield;
 };
@@ -22,13 +16,16 @@ const getMineField = (rows, columns, mines) => {
 const generateMinePositions = (minefield, rows, columns) => {
   let minePosition = null;
   let continueLoop = true;
+
   while (continueLoop) {
     minePosition = getRandomCoordinate(rows, columns);
     if (positionIsFree(minefield, minePosition)) {
       let x = minePosition[0];
       let y = minePosition[1];
       minefield[x][y] = "X";
-      minefield = fillMineMarker(minefield, x, y);
+      fillMineMarker(minefield, x, y, rows, columns);
+      continueLoop = false;
+      return minefield;
     }
   }
 };
@@ -36,7 +33,43 @@ const generateMinePositions = (minefield, rows, columns) => {
 const positionIsFree = (minefield, position) => {
   let x = position[0];
   let y = position[1];
-  return !(minefield[x][y] = "X");
+  return !(minefield[x][y] == "X");
 };
 
-const fillMineMarker = (minefield, x, y) => {};
+const getRandomCoordinate = (rows, columns) => {
+  return [
+    Math.floor(Math.random() * rows),
+    Math.floor(Math.random() * columns)
+  ];
+};
+const fillMineMarker = (minefield, x, y, rows, columns) => {
+  console.log(x, y);
+  rows = rows - 1;
+  columns = columns - 1;
+  if (x > 0 && minefield[x - 1][y] == " ") {
+    minefield[x - 1][y] += 1;
+  }
+  if (x > 0 && y > 0 && minefield[x - 1][y - 1] == " ") {
+    minefield[x - 1][y - 1] += 1;
+  }
+  if (x > 0 && y < columns && minefield[x - 1][y + 1] == " ") {
+    minefield[x - 1][y + 1] += 1;
+  }
+  if (y < columns && minefield[x][y + 1] == " ") {
+    minefield[x][y + 1] += 1;
+  }
+  if (y > 0 && minefield[x][y - 1] == " ") {
+    minefield[x][y - 1] += 1;
+  }
+  if (x < rows && minefield[x + 1][y] == " ") {
+    minefield[x + 1][y] += 1;
+  }
+  if (x < rows && y > 0 && minefield[x + 1][y - 1] == " ") {
+    minefield[x + 1][y - 1] += 1;
+  }
+  if (x < rows && y < columns && minefield[x + 1][y + 1] == " ") {
+    minefield[x + 1][y + 1] += 1;
+  }
+};
+
+// || typeof minefield[x - 1][y] == "number"
