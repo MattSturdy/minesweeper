@@ -1,0 +1,8 @@
+#table {
+  border: black 1px dashed;
+}
+td {
+  border: black 1px dashed;
+  width: 1em;
+  height: 1em;
+}
