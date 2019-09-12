@@ -1,4 +1,21 @@
-const getMineField = (rows, columns, mines) => {
+const getValues = () => {
+  let x = document.getElementById("mineForm");
+  let rows = x.elements[0].value;
+  let columns = x.elements[1].value;
+  let mines = x.elements[2].value;
+  let filledMap = getMinefield(rows, columns, mines);
+  let table = document.getElementById("table");
+
+  for (let i = 0; i < filledMap.length; i++) {
+    let newRow = table.insertRow(table.length);
+    for (var j = 0; j < filledMap[i].length; j++) {
+      let cell = newRow.insertCell(j);
+      cell.innerHTML = filledMap[i][j];
+    }
+  }
+};
+
+const getMinefield = (rows, columns, mines) => {
   let minefield = [];
   for (let i = 0; i < rows; i++) {
     minefield[i] = [rows];
