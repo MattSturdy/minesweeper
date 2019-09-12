@@ -8,7 +8,6 @@ const getMineField = (rows, columns, mines) => {
   }
   for (let i = 0; i < mines; i++) {
     minefield = generateMinePositions(minefield, rows, columns);
-    console.log(minefield);
   }
   return minefield;
 };
@@ -43,33 +42,53 @@ const getRandomCoordinate = (rows, columns) => {
   ];
 };
 const fillMineMarker = (minefield, x, y, rows, columns) => {
-  console.log(x, y);
   rows = rows - 1;
   columns = columns - 1;
+
   if (x > 0 && minefield[x - 1][y] == " ") {
-    minefield[x - 1][y] += 1;
+    minefield[x - 1][y] = 1;
+  } else if (x > 0) {
+    incrementMineMarker(x - 1, y, minefield);
   }
   if (x > 0 && y > 0 && minefield[x - 1][y - 1] == " ") {
-    minefield[x - 1][y - 1] += 1;
+    minefield[x - 1][y - 1] = 1;
+  } else if (x > 0 && y > 0) {
+    incrementMineMarker(x - 1, y - 1, minefield);
   }
   if (x > 0 && y < columns && minefield[x - 1][y + 1] == " ") {
-    minefield[x - 1][y + 1] += 1;
+    minefield[x - 1][y + 1] = 1;
+  } else if (x > 0 && y < columns) {
+    incrementMineMarker(x - 1, y + 1, minefield);
   }
   if (y < columns && minefield[x][y + 1] == " ") {
-    minefield[x][y + 1] += 1;
+    minefield[x][y + 1] = 1;
+  } else if (y < columns) {
+    incrementMineMarker(x, y + 1, minefield);
   }
   if (y > 0 && minefield[x][y - 1] == " ") {
-    minefield[x][y - 1] += 1;
+    minefield[x][y - 1] = 1;
+  } else if (y > 0) {
+    incrementMineMarker(x, y - 1, minefield);
   }
   if (x < rows && minefield[x + 1][y] == " ") {
-    minefield[x + 1][y] += 1;
+    minefield[x + 1][y] = 1;
+  } else if (x < rows) {
+    incrementMineMarker(x + 1, y, minefield);
   }
   if (x < rows && y > 0 && minefield[x + 1][y - 1] == " ") {
-    minefield[x + 1][y - 1] += 1;
+    minefield[x + 1][y - 1] = 1;
+  } else if (x < rows && y > 0) {
+    incrementMineMarker(x + 1, y - 1, minefield);
   }
   if (x < rows && y < columns && minefield[x + 1][y + 1] == " ") {
-    minefield[x + 1][y + 1] += 1;
+    minefield[x + 1][y + 1] = 1;
+  } else if (x < rows && y < columns) {
+    incrementMineMarker(x + 1, y + 1, minefield);
   }
 };
 
-// || typeof minefield[x - 1][y] == "number"
+const incrementMineMarker = (x, y, minefield) => {
+  if (typeof minefield[x][y] == "number") {
+    minefield[x][y]++;
+  }
+};
