@@ -3,8 +3,10 @@ const getValues = () => {
   let rows = x.elements[0].value;
   let columns = x.elements[1].value;
   let mines = x.elements[2].value;
-  let filledMap = getMinefield(rows, columns, mines);
   let table = document.getElementById("table");
+  table.innerHTML = "";
+
+  let filledMap = getMinefield(rows, columns, mines);
 
   for (let i = 0; i < filledMap.length; i++) {
     let newRow = table.insertRow(table.length);
