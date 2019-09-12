@@ -26,4 +26,4 @@ Keeping the data in this format would also allow the application to be scaled if
 I wanted to extract out the functions into the functionality of: 
 - Generating the minefield -- making the 2d array using the rows and columns as inputs I would then add the mines
 - Adding the mine positions -- I used a while loop here in order to continue checking for available spaces to place the mine in case the first random coordinates are taken, and then I would fill in the markers around the mine.
-- Filling Mine Markers - Here I am conditionally filling the markers based on if A they are coordinates that are within the array i.e. not on the edge of the map and also if the value is empty or if there is a number already inside that needs to be incremented. 
+- Filling Mine Markers - Here I am conditionally filling the markers based on if they are coordinates that are within the array i.e. not on the edge of the map and also if the value is empty. Or if there is a number already inside that needs to be incremented. 
