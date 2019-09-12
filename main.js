@@ -24,7 +24,7 @@ const checkMapIsValid = (rows, columns, mines) => {
     return getMinefield(rows, columns, mines);
   } else {
     document.getElementById("format").innerHTML =
-      "Please increase the map size for these mines";
+      "Please enter a valid map format";
   }
 };
 
