@@ -4,9 +4,11 @@ const getValues = () => {
   let columns = x.elements[1].value;
   let mines = x.elements[2].value;
   let table = document.getElementById("table");
-  table.innerHTML = "";
 
-  let filledMap = getMinefield(rows, columns, mines);
+  table.innerHTML = "";
+  document.getElementById("format").innerHTML = "";
+
+  let filledMap = checkMapIsValid(rows, columns, mines);
 
   for (let i = 0; i < filledMap.length; i++) {
     let newRow = table.insertRow(table.length);
@@ -14,6 +16,15 @@ const getValues = () => {
       let cell = newRow.insertCell(j);
       cell.innerHTML = filledMap[i][j];
     }
+  }
+};
+
+const checkMapIsValid = (rows, columns, mines) => {
+  if (rows * columns > mines) {
+    return getMinefield(rows, columns, mines);
+  } else {
+    document.getElementById("format").innerHTML =
+      "Please increase the map size for these mines";
   }
 };
 
